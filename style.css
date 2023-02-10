@@ -1,0 +1,462 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan&display=swap");
+
+html {
+  cursor: pointer;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: #0f0c29; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #24243e,
+    #302b63,
+    #0f0c29
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #24243e,
+    #302b63,
+    #0f0c29
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 0.5vh 0;
+  display: flex;
+  flex-direction: column;
+}
+.score-result {
+  height: 25px;
+  color: #fff;
+  font-size: 20px;
+  padding: 3px 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mastermind-board {
+  width: 280px;
+  background-color: #60605e;
+  /* height: 99vh; */
+  display: grid;
+  grid-template-rows: 70px 1fr 120px;
+  border: 1px solid #60605e;
+  border-radius: 20px;
+}
+.solution-mastermind {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  border-bottom: 1px solid #000000;
+}
+.solution-mastermind-cover {
+  position: absolute;
+  content: "";
+  width: 90%;
+  height: 80%;
+  border-radius: 20px;
+  z-index: 10000;
+  transition: all ease-in 0.3s;
+}
+.cover-active {
+  background-color: #474747;
+}
+.solution-mastermind .peg-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.solution-mastermind .peg-hole {
+  width: 40px !important;
+  height: 40px !important;
+  background: #474747;
+  border: 5px solid #737373;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.mastermind-playarea {
+  display: flex;
+  flex-direction: column;
+  gap: 5px !important;
+  padding: 10px 0px;
+}
+.mastermind-playarea .peg-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-direction: row-reverse;
+
+  /* background-color: #13e040; */
+}
+.mastermind-playarea .peg-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mastermind-playarea .peg-hole {
+  width: 40px !important;
+  height: 40px !important;
+  background: #474747;
+  border: 5px solid #737373;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.mastermind-playarea .peg-result {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  height: 40px;
+  width: 40px;
+}
+.peg-btn {
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  background-color: #474747;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.peg i {
+  color: #fff;
+}
+.peg-result-hole {
+  height: 17px;
+  width: 17px;
+  background: #474747;
+  border: 2px solid #737373;
+  border-radius: 100px;
+}
+.peg-result-hole .peg-hole {
+  height: 10px;
+  width: 10px;
+
+  /* border: 5px solid #737373; */
+}
+
+.mastermind-pegs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px !important;
+  padding: 0 10px;
+  border-top: 1px solid #000000;
+}
+.mastermind-pegs .peg-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mastermind-pegs .peg-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.mastermind-pegs .peg-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mastermind-pegs .peg-hole {
+  width: 40px !important;
+  height: 40px !important;
+  background: #474747;
+  border: 5px solid #737373;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Peg Colors */
+
+/* Red */
+.red {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  background: radial-gradient(
+    118.33% 118.33% at 73.75% 27.5%,
+    #e04b4b 0%,
+    rgba(255, 206, 206, 0.953851) 0.01%,
+    rgba(200, 5, 5, 0.716855) 44.74%,
+    rgba(243, 116, 116, 0.444901) 70.66%,
+    rgba(228, 4, 4, 0) 100%
+  );
+}
+.red::before {
+  position: absolute;
+  content: " ";
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  background: radial-gradient(
+    118.54% 118.54% at 85.83% 34.58%,
+    #d00303 0%,
+    #d00303 0%,
+    rgba(221, 0, 0, 0) 0.01%,
+    rgba(194, 9, 9, 0.444901) 12.74%,
+    rgba(235, 34, 34, 0.716855) 28.08%,
+    rgba(162, 33, 33, 0.414691) 51.38%,
+    rgba(193, 8, 8, 0) 68.57%
+  );
+}
+
+/* Green */
+.green {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  background: radial-gradient(
+    118.54% 118.54% at 85.83% 34.58%,
+    #13e040 0%,
+    #54f477 0%,
+    rgba(0, 221, 181, 0) 0.01%,
+    rgba(5, 213, 51, 0.444901) 12.74%,
+    rgba(12, 216, 44, 0.716855) 28.08%,
+    rgba(0, 200, 44, 0.414691) 51.38%,
+    rgba(2, 184, 20, 0) 68.57%
+  );
+}
+.green::before {
+  position: absolute;
+  content: " ";
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  background: radial-gradient(
+    118.33% 118.33% at 73.75% 27.5%,
+    #81c086 0%,
+    rgba(200, 255, 205, 0.953851) 0.01%,
+    rgba(11, 211, 31, 0.716855) 44.74%,
+    rgba(86, 216, 160, 0.445) 70.66%,
+    rgba(0, 217, 61, 0) 100%
+  );
+}
+
+/* blue */
+.blue {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  background: radial-gradient(
+    118.33% 118.33% at 73.75% 27.5%,
+    #d8dce9 0%,
+    rgba(214, 214, 255, 0.953851) 0.01%,
+    rgba(173, 183, 244, 0.906988) 0.02%,
+    rgba(3, 59, 201, 0.716855) 44.74%,
+    rgba(89, 89, 230, 0.445) 70.66%,
+    rgba(0, 57, 205, 0) 100%
+  );
+}
+.blue::before {
+  position: absolute;
+  content: " ";
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  background: radial-gradient(
+    118.54% 118.54% at 85.83% 34.58%,
+    #2c67ff 0%,
+    rgba(4, 0, 221, 0) 0.01%,
+    rgba(50, 17, 255, 0.444901) 12.74%,
+    rgba(45, 41, 238, 0.716855) 28.08%,
+    rgba(0, 56, 254, 0.414691) 51.38%,
+    rgba(57, 0, 221, 0) 68.57%
+  );
+}
+
+/* yellow */
+.yellow {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  background: radial-gradient(
+    118.33% 118.33% at 73.75% 27.5%,
+    #fffee4 0%,
+    rgba(255, 230, 0, 0.716855) 39.06%,
+    rgba(231, 231, 140, 0.445) 66.67%,
+    rgba(248, 243, 95, 0.59) 100%
+  );
+}
+.yellow::before {
+  position: absolute;
+  content: " ";
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  background: radial-gradient(
+    118.54% 118.54% at 85.83% 34.58%,
+    #fcf9dc 0%,
+    rgba(205, 187, 21, 0.534) 0.01%,
+    rgba(202, 190, 75, 0.445) 12.74%,
+    rgba(214, 192, 0, 0.716855) 28.08%,
+    rgba(207, 187, 7, 0.414691) 51.38%,
+    rgba(221, 212, 0, 0) 68.57%
+  );
+}
+
+/* black */
+.black {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  background: radial-gradient(
+    118.33% 118.33% at 73.75% 27.5%,
+    #b8b8b8 0%,
+
+    rgba(173, 173, 173, 0.953851) 0.01%,
+    rgba(0, 0, 0, 0.716855) 44.74%,
+    rgba(77, 77, 77, 0.444901) 70.66%,
+    rgba(245, 210, 181, 0.315918) 99.99%,
+    rgba(41, 40, 40, 0) 100%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+.black::before {
+  position: absolute;
+  content: " ";
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  background: radial-gradient(
+    118.54% 118.54% at 85.83% 34.58%,
+    #353535 0.8%,
+    #828080 0%,
+    rgba(21, 21, 21, 0) 0.01%,
+    #262626 12.74%,
+    rgba(0, 0, 0, 0.717) 28.08%,
+    rgba(21, 20, 20, 0.414691) 51.38%,
+    rgba(67, 67, 67, 0) 68.57%
+  );
+}
+
+/* white */
+.white {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  background: radial-gradient(
+    118.33% 118.33% at 73.75% 27.5%,
+    #ffffff 0%,
+    rgba(240, 240, 240, 0.953851) 0.01%,
+    rgba(255, 255, 255, 0.948384) 17.71%,
+    rgba(255, 254, 253, 0.444901) 43.75%,
+    rgba(255, 255, 255, 0.716855) 73.96%,
+    rgba(224, 224, 224, 0) 99.98%,
+    rgba(245, 210, 181, 0.315918) 99.99%
+  );
+}
+.white::before {
+  position: absolute;
+  content: " ";
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  background: radial-gradient(
+    118.54% 118.54% at 85.83% 34.58%,
+    rgba(255, 255, 255, 0.716855) 0%,
+    rgba(255, 255, 255, 0.716855) 0%,
+    #c5c5c5 0%,
+    rgba(236, 236, 236, 0) 0.01%,
+    #ffffff 13.54%,
+    rgba(255, 255, 255, 0.414691) 51.38%,
+    rgba(255, 255, 255, 0) 68.57%
+  );
+}
+
+/* orange */
+.orange {
+  position: relative;
+  border-radius: 100px;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    118.33% 118.33% at 73.75% 27.5%,
+    #ff8551 0%,
+    rgba(255, 171, 167, 0.954) 0.01%,
+    rgba(247, 75, 21, 0.716855) 44.74%,
+    rgba(238, 173, 107, 0.445) 70.66%,
+    rgba(245, 210, 181, 0.315918) 99.99%,
+    rgba(205, 38, 1, 0) 100%
+  );
+}
+.orange::before {
+  position: absolute;
+  content: " ";
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  background: radial-gradient(
+    118.54% 118.54% at 85.83% 34.58%,
+    #f0503a 0%,
+    #ff912c 0%,
+    rgba(255, 153, 0, 0) 0.01%,
+    #ff774d 90%,
+    rgba(209, 55, 6, 0.716855) 40.08%,
+    rgba(255, 61, 0, 0.414691) 90.38%,
+    rgba(185, 48, 5, 0) 68.57%
+  );
+}
+
+/* orange */
+.brown {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  background: radial-gradient(
+    118.33% 118.33% at 73.75% 27.5%,
+    #ba7000 0%,
+    rgba(255, 216, 214, 0.953851) 0.01%,
+    rgba(158, 114, 1, 0.716855) 44.74%,
+    rgba(248, 158, 53, 0.444901) 70.66%,
+    rgba(245, 210, 181, 0.315918) 99.99%,
+    rgba(168, 101, 0, 0) 100%,
+    rgba(158, 95, 0, 0) 100%
+  );
+}
+.brown::before {
+  position: absolute;
+  content: " ";
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  background: radial-gradient(
+    118.54% 118.54% at 85.83% 34.58%,
+    #97580c 0%,
+    #ff912c 0%,
+    rgba(176, 90, 10, 0) 0.01%,
+    #bd8800 12.74%,
+    rgba(157, 94, 0, 0.716855) 28.08%,
+    rgba(120, 72, 0, 0.414691) 51.38%,
+    rgba(148, 108, 6, 0) 68.57%
+  );
+}
