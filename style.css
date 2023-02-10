@@ -1,9 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=League+Spartan&display=swap");
 
-html {
-  cursor: pointer;
-}
-
 body {
   position: relative;
   overflow-x: hidden;
@@ -187,6 +183,7 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
+  cursor: pointer;
 }
 
 /* Peg Colors */
